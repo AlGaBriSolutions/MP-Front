@@ -1,0 +1,76 @@
+<header>
+    <nav>
+        <a href=""><b class="h">Home</b></a>
+        <a href=""><b class="h">Catálogo</b></a>
+        <a href=""><b class="h">Contácto</b></a>
+        <div class="iconosH">
+            <a href=""><b class="h"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0m0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5z" clip-rule="evenodd"/></svg></b></a>
+            <a href=""><b class="h"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 48 48"><g fill="none"><path fill="currentColor" d="M39 32H13L8 12h36z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M3 6h3.5L8 12m0 0l5 20h26l5-20z"/><circle cx="13" cy="39" r="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><circle cx="39" cy="39" r="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/></g></svg></b></a>
+        </div>
+    </nav>
+</header>
+<div class="marketplace-container">
+    <!-- Filtros laterales -->
+    <aside class="filters-sidebar">
+      <h3>Filtrar por</h3>
+      <div class="filter-group">
+        <h4>categoría</h4>
+        <div *ngFor="let categoria of categorias">
+          <label>
+            <input type="checkbox">{{ categoria }}
+          </label>
+        </div>
+      </div>
+      <div class="filter-group">
+        <h4>Regional</h4>
+        <div *ngFor="let region of regions">
+          <label>
+            <input type="checkbox">{{ region }}
+          </label>
+        </div>
+      </div>
+    </aside>
+  
+    <!-- Lista de productos -->
+    <main class="product-list">
+      <div class="header">
+        <div class="container">
+            <input type="text" name="text" id="filtro" class="input" required=""
+                placeholder="Escribe encontrar ofertas..." [(ngModel)]="filtro">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+                    <title>Search</title>
+                    <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none"
+                        stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                        stroke-width="32" d="M338.29 338.29L448 448"></path>
+                </svg>
+            </div>
+        </div>
+        <p>Hay {{ products.length }} productos.</p>
+        <div>
+          <label for="order">Ordenar por:</label>
+          <select id="order" (change)="sortProducts($event)">
+            <option value="">Elegir</option>
+            <option value="priceAsc">Precio más bajo</option>
+            <option value="priceDesc">Precio más alto</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="products-grid">
+        <div *ngFor="let product of aplicarFiltro()" class="product-card">
+          <img [src]="product.image" alt="{{ product.title }}" class="product-image" />
+          <div class="product-details">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">
+              Precio regular: <span class="regular-price">{{ product.regularPrice | currency }}</span><br />
+            </p>
+            <p>Vendido por: <strong>{{ product.seller }}</strong></p>
+            <button (click)="addToCart(product)">Añadir al carrito</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>

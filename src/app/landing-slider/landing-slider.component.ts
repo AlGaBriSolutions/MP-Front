@@ -1,11 +1,18 @@
 import { Component , OnInit} from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-landing-slider',
   templateUrl: './landing-slider.component.html',
   styleUrls: ['./landing-slider.component.css']
 })
 export class LandingSliderComponent implements OnInit{
+
+  constructor(private router: Router) {}
+
+  goToCatalogo() {
+    this.router.navigate(['/catalogo']); // Navega a la ruta del marketplace
+  }
+
   timeRunning: number = 3000;
   timeAutoNext: number = 20000;
   runTimeOut: any;

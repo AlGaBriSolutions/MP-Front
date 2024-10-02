@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,8 @@ import { LandingSliderComponent } from './landing-slider/landing-slider.componen
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { PopupComponent } from './popup/popup.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrarseComponent } from './registrarse/registrarse.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { CarritoComponent } from './carrito/carrito.component';
     LandingSliderComponent,
     CatalogoComponent,
     PopupComponent,
-    CarritoComponent
+    CarritoComponent,
+    LoginComponent,
+    RegistrarseComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

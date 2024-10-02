@@ -1,4 +1,6 @@
 import { Component} from '@angular/core';
+import { CarritoService } from '../services/carrito.service';
+import { Item } from '../models/Item';
 
 @Component({
   selector: 'app-catalogo',
@@ -6,13 +8,15 @@ import { Component} from '@angular/core';
   styleUrls: ['./catalogo.component.css']
 })
 export class CatalogoComponent {
+  products: Item[] = [];
   categorias = ['Alojamiento', 'Alimentación', 'Transporte', 'Paseos Ecológicos', 'Extremo', 'Senderismo'];
   filtro: string = '';
   mostrarPopup = false;
   mensajePopup: string = "";
   categoriaSeleccionada: string = '';
   categoriasSeleccionadas: string[] = [];
-  products = [
+  cartCount: number = 0;
+  Items = [
     {
       image: '../../../assets/images/img1.jpg',
       titulo: 'Senderismo Parque Ecológico X',
@@ -99,9 +103,13 @@ export class CatalogoComponent {
     },
   ];
 
-  addToCart(product: any) {
+  constructor(private carritoService: CarritoService) {
+    this.updateCartCount(); // Inicializa el conteo
+  }
+  addToCart(product: Item) {
+    this.carritoService.addToCart(product);
+    this.updateCartCount(); 
     this.mensajePopup = 'Producto agregado al carrito con éxito';
-    
     // Mostrar el popup
     this.mostrarPopup = true;
 
@@ -109,21 +117,23 @@ export class CatalogoComponent {
     setTimeout(() => {
       this.cerrarPopup();
     }, 5000); //
-    console.log('Producto añadido al carrito:', product);
-    // Implementar la lógica para añadir al carrito
   }
 
-  sortProducts(event: any) {
+  private updateCartCount() {
+    this.cartCount = this.carritoService.getCartCount();
+  }
+
+  sortItems(event: any) {
     const value = event.target.value;
     if (value === 'priceAsc') {
-      this.products.sort((a, b) => a.precio - b.precio);
+      this.Items.sort((a, b) => a.precio - b.precio);
     } else if (value === 'priceDesc') {
-      this.products.sort((a, b) => b.precio - a.precio);
+      this.Items.sort((a, b) => b.precio - a.precio);
     }
   }
 
   aplicarFiltro() {
-    return this.products.filter((product) => {
+    return this.Items.filter((product) => {
       const coincideFiltro =
         product.titulo.toLowerCase().includes(this.filtro.toLowerCase()) ||
         product.contenido.toLowerCase().includes(this.filtro.toLowerCase()) ||

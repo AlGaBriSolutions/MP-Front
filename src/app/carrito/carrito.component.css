@@ -1,0 +1,275 @@
+.todo{
+    width: 100%;
+    height: 100vh;
+    background-color: #f9fafb;
+  }
+  
+    a{
+      text-decoration: none;
+    }
+    .h:hover{
+      color: #324c29;
+    }
+  
+    .container:hover{
+      color: #324c29;
+    }
+  
+    header{
+      width: 100%;
+      max-width: 80%;
+      margin: auto;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+      margin-left: 0;
+      padding-top: 1%;
+  }
+  header a{
+      color: #f1683a;
+      margin-right: 40px;
+      margin-top: 50px;
+  }
+  
+  .h{
+      font-size: 20px;
+  }
+  nav{
+      position: fixed;
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+      background-color: #f9fafb;
+      padding-left: 10%;
+      padding-bottom: 1.5%;
+  }
+  
+  .iconosH{
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      position: absolute;
+      right: 130px;
+      top:0;
+  }
+
+  .carrito-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    margin-top: 5%;
+  }
+  
+  .carrito-left {
+    width: 45%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(13, 13, 13, 0.1);
+    margin-left: 9%;
+  }
+  
+  .carrito-left h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .continuar-comprando-link {
+    color: #f1683a;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .continuar-comprando-link:hover{
+    color: #324c29;
+  }
+  
+  .continuar-comprando-link span {
+    margin-right: 5px;
+  }
+  
+  .carrito-right {
+    width: 30%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 10%;
+  }
+  
+  .mensaje-nota {
+    background-color: #d3e7cb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .resumen-carrito {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+  }
+  
+  .btn-finalizar-compra {
+    background-color: #324c29;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .btn-finalizar-compra:disabled {
+    background-color: #324c29;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .copy {
+    /* button */
+    --button-bg: #353434;
+    --button-hover-bg: #324c29;
+    --button-text-color: #CCCCCC;
+    --button-hover-text-color: #8bb9fe;
+    --button-border-radius: 10px;
+    --button-diameter: 36px;
+    --button-outline-width: 1px;
+    --button-outline-color: rgb(141, 141, 141);
+    /* tooltip */
+    --tooltip-bg: #f4f3f3;
+    --toolptip-border-radius: 20px;
+    --tooltip-font-family: Poppins;
+    /* 👆 this field should not be empty */
+    --tooltip-font-size: 12px;
+    /* 👆 this field should not be empty */
+    --tootip-text-color: rgb(50, 50, 50);
+    --tooltip-padding-x: 7px;
+    --tooltip-padding-y: 7px;
+    --tooltip-offset: 8px;
+    /* --tooltip-transition-duration: 0.3s; */
+    /* 👆 if you need a transition, 
+    just remove the comment,
+    but I didn't like the transition :| */
+  }
+  
+  .copy {
+    box-sizing: border-box;
+    width: var(--button-diameter);
+    height: var(--button-diameter);
+    border-radius: 20px;
+    background-color: #f1683a;
+    color: var(--button-text-color);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    padding: 5px;
+    margin-top:0.5%;
+  }
+  
+  .tooltip {
+    position: absolute;
+    opacity: 0;
+    visibility: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font: var(--tooltip-font-size) var(--tooltip-font-family);
+    color: var(--tootip-text-color);
+    background: var(--tooltip-bg);
+    padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+    border-radius: var(--toolptip-border-radius);
+    pointer-events: none;
+    transition: all var(--tooltip-transition-duration) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .tooltip::before {
+    content: attr(data-text-initial);
+  }
+  
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: calc(var(--tooltip-padding-y) / 2 * -1);
+    width: var(--tooltip-padding-y);
+    height: var(--tooltip-padding-y);
+    background: inherit;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    z-index: -999;
+    pointer-events: none;
+  }
+  
+  .copy svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .checkmark {
+    display: none;
+  }
+  
+  /* actions */
+  
+  .copy:hover .tooltip,
+  .copy:focus:not(:focus-visible) .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: calc((100% + var(--tooltip-offset)) * -1);
+  }
+  
+  .copy:focus:not(:focus-visible) .tooltip::before {
+    content: attr(data-text-end);
+  }
+  
+  .copy:focus:not(:focus-visible) .clipboard {
+    display: none;
+  }
+  
+  .copy:focus:not(:focus-visible) .checkmark {
+    display: block;
+  }
+  
+  .copy:hover,
+  .copy:focus {
+    background-color: var(--button-hover-bg);
+  }
+  
+  .copy:active {
+    outline: var(--button-outline-width) solid var(--button-outline-color);
+  }
+  
+  .copy:hover svg {
+    color: var(--button-hover-text-color);
+  }
+  
+  .cont-btn {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+  }
+
+  .carrito-items{
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding: 0; /* Elimina el padding por defecto */
+    margin: 0;
+  }

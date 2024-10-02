@@ -8,6 +8,7 @@ import { LandingPageComponent } from './Landing/landing-page/landing-page.compon
 import { LandingSliderComponent } from './landing-slider/landing-slider.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { PopupComponent } from './popup/popup.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PopupComponent } from './popup/popup.component';
     LandingPageComponent,
     LandingSliderComponent,
     CatalogoComponent,
-    PopupComponent
+    PopupComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

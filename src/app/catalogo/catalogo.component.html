@@ -1,76 +1,247 @@
-<header>
+<div class="todo">
+  <header>
     <nav>
-        <a href=""><b class="h">Home</b></a>
-        <a href=""><b class="h">Catálogo</b></a>
-        <a href=""><b class="h">Contácto</b></a>
-        <div class="iconosH">
-            <a href=""><b class="h"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0m0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5z" clip-rule="evenodd"/></svg></b></a>
-            <a href=""><b class="h"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 48 48"><g fill="none"><path fill="currentColor" d="M39 32H13L8 12h36z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M3 6h3.5L8 12m0 0l5 20h26l5-20z"/><circle cx="13" cy="39" r="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><circle cx="39" cy="39" r="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/></g></svg></b></a>
-        </div>
+      <a href=""><b class="h">Home</b></a>
+      <a href=""><b class="h">Catálogo</b></a>
+      <a href=""><b class="h">Contácto</b></a>
+      <div class="iconosH">
+        <a href=""
+          ><b class="h"
+            ><svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0m0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5z"
+                clip-rule="evenodd"
+              /></svg></b
+        ></a>
+        <a href=""
+          ><b class="h"
+            ><svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 48 48"
+            >
+              <g fill="none">
+                <path fill="currentColor" d="M39 32H13L8 12h36z" />
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                  d="M3 6h3.5L8 12m0 0l5 20h26l5-20z"
+                />
+                <circle
+                  cx="13"
+                  cy="39"
+                  r="3"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                />
+                <circle
+                  cx="39"
+                  cy="39"
+                  r="3"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                />
+              </g></svg></b
+        ></a>
+      </div>
     </nav>
-</header>
-<div class="marketplace-container">
+  </header>
+
+  <div class="marketplace-container">
+    <div class="tituloP">
+      <span class="txtTitulo">Quetzalia Marketplace</span>
+    </div>
     <!-- Filtros laterales -->
     <aside class="filters-sidebar">
-      <h3>Filtrar por</h3>
+      <h3>Filtrar por Categoría</h3>
       <div class="filter-group">
-        <h4>categoría</h4>
-        <div *ngFor="let categoria of categorias">
-          <label>
-            <input type="checkbox">{{ categoria }}
-          </label>
+        <div *ngFor="let categoria of categorias; let i = index" class="check">
+          <div class="cntr">
+            <input
+              type="checkbox"
+              [id]="'checkbox_' + i"
+              (change)="actualizarCategoriasSeleccionadas(categoria, $event)"
+              class="hidden-xs-up"
+            />
+
+            <label [for]="'checkbox_' + i" class="cbx"></label>
+          </div>
+          <label class="lbl">{{ categoria }}</label>
         </div>
       </div>
-      <div class="filter-group">
-        <h4>Regional</h4>
-        <div *ngFor="let region of regions">
-          <label>
-            <input type="checkbox">{{ region }}
+      <div>
+        <h3 for="order">Ordenar por:</h3>
+        <div class="radio-buttons">
+          <label class="radio-button">
+            <input
+              type="radio"
+              name="order"
+              value="priceAsc"
+              (change)="sortProducts($event)"
+              class="hidden-xs-up"
+            />
+            <div class="cbx"></div>
+            <span class="radio-label">Precio más bajo</span>
+          </label>
+          <label class="radio-button">
+            <input
+              type="radio"
+              name="order"
+              value="priceDesc"
+              (change)="sortProducts($event)"
+              class="hidden-xs-up"
+            />
+            <div class="cbx"></div>
+            <span class="radio-label">Precio más alto</span>
           </label>
         </div>
       </div>
     </aside>
-  
+
     <!-- Lista de productos -->
-    <main class="product-list">
-      <div class="header">
-        <div class="container">
-            <input type="text" name="text" id="filtro" class="input" required=""
-                placeholder="Escribe encontrar ofertas..." [(ngModel)]="filtro">
-            <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
-                    <title>Search</title>
-                    <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none"
-                        stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
-                        stroke-width="32" d="M338.29 338.29L448 448"></path>
-                </svg>
-            </div>
-        </div>
-        <p>Hay {{ products.length }} productos.</p>
-        <div>
-          <label for="order">Ordenar por:</label>
-          <select id="order" (change)="sortProducts($event)">
-            <option value="">Elegir</option>
-            <option value="priceAsc">Precio más bajo</option>
-            <option value="priceDesc">Precio más alto</option>
-          </select>
+    <div class="header">
+      <div class="container">
+        <input
+          type="text"
+          name="text"
+          id="filtro"
+          class="input"
+          required=""
+          placeholder="Encuentra ofertas..."
+          [(ngModel)]="filtro"
+        />
+        <div class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <title>Search</title>
+            <path
+              d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+              fill="none"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+              stroke-width="32"
+            ></path>
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-miterlimit="10"
+              stroke-width="32"
+              d="M338.29 338.29L448 448"
+            ></path>
+          </svg>
         </div>
       </div>
-  
+      <!-- <p class="found">Se econtraron {{ products.length }} productos:</p> -->
+    </div>
+    <main class="product-list">
       <div class="products-grid">
         <div *ngFor="let product of aplicarFiltro()" class="product-card">
-          <img [src]="product.image" alt="{{ product.title }}" class="product-image" />
+          <img
+            [src]="product.image"
+            alt="{{ product.titulo }}"
+            class="product-image"
+          />
           <div class="product-details">
-            <h3>{{ product.title }}</h3>
-            <p>{{ product.description }}</p>
+            <h3>{{ product.titulo }}</h3>
+            <p>{{ product.contenido }}</p>
             <p class="price">
-              Precio regular: <span class="regular-price">{{ product.regularPrice | currency }}</span><br />
+              Precio:
+              <span class="regular-price">{{ product.precio | currency }}</span
+              ><br />
             </p>
-            <p>Vendido por: <strong>{{ product.seller }}</strong></p>
-            <button (click)="addToCart(product)">Añadir al carrito</button>
+            <p>
+              <strong>{{ product.clasificacion }}</strong>
+            </p>
+            <div class="footer">
+              <button class="copy">
+                <span
+                  data-text-initial="Agregar al carrito"
+                  class="tooltip"
+                ></span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill="#fff"
+                      d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607l1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4a2 2 0 0 0 0-4h7a2 2 0 1 0 0 4a2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0a1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="input-wrapper">
+                <svg
+                  class="icon2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g data-name="Layer 2">
+                    <g data-name="inbox">
+                      <rect
+                        width="24"
+                        height="24"
+                        transform="rotate(180 12 12)"
+                        opacity="0"
+                      ></rect>
+                      <path
+                        d="M20.79 11.34l-3.34-6.68A3 3 0 0 0 14.76 3H9.24a3 3 0 0 0-2.69 1.66l-3.34 6.68a2 2 0 0 0-.21.9V18a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-5.76a2 2 0 0 0-.21-.9zM8.34 5.55a1 1 0 0 1 .9-.55h5.52a1 1 0 0 1 .9.55L18.38 11H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1H5.62z"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+                <input
+                  type="text"
+                  name="text"
+                  class="input2"
+                  placeholder="     ¿Alguna Pregunta?"
+                />
+                <button class="Subscribe-btn">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="10"
+                    viewBox="0 0 38 15"
+                    class="arrow2"
+                  >
+                    <path
+                      d="M10 7.519l-.939-.344h0l.939.344zm14.386-1.205l-.981-.192.981.192zm1.276 5.509l.537.843.148-.094.107-.139-.792-.611zm4.819-4.304l-.385-.923h0l.385.923zm7.227.707a1 1 0 0 0 0-1.414L31.343.448a1 1 0 0 0-1.414 0 1 1 0 0 0 0 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM1 7.519l.554.833.029-.019.094-.061.361-.23 1.277-.77c1.054-.609 2.397-1.32 3.629-1.787.617-.234 1.17-.392 1.623-.455.477-.066.707-.008.788.034.025.013.031.021.039.034a.56.56 0 0 1 .058.235c.029.327-.047.906-.39 1.842l1.878.689c.383-1.044.571-1.949.505-2.705-.072-.815-.45-1.493-1.16-1.865-.627-.329-1.358-.332-1.993-.244-.659.092-1.367.305-2.056.566-1.381.523-2.833 1.297-3.921 1.925l-1.341.808-.385.245-.104.068-.028.018c-.011.007-.011.007.543.84zm8.061-.344c-.198.54-.328 1.038-.36 1.484-.032.441.024.94.325 1.364.319.45.786.64 1.21.697.403.054.824-.001 1.21-.09.775-.179 1.694-.566 2.633-1.014l3.023-1.554c2.115-1.122 4.107-2.168 5.476-2.524.329-.086.573-.117.742-.115s.195.038.161.014c-.15-.105.085-.139-.076.685l1.963.384c.192-.98.152-2.083-.74-2.707-.405-.283-.868-.37-1.28-.376s-.849.069-1.274.179c-1.65.43-3.888 1.621-5.909 2.693l-2.948 1.517c-.92.439-1.673.743-2.221.87-.276.064-.429.065-.492.057-.043-.006.066.003.155.127.07.099.024.131.038-.063.014-.187.078-.49.243-.94l-1.878-.689zm14.343-1.053c-.361 1.844-.474 3.185-.413 4.161.059.95.294 1.72.811 2.215.567.544 1.242.546 1.664.459a2.34 2.34 0 0 0 .502-.167l.15-.076.049-.028.018-.011c.013-.008.013-.008-.524-.852l-.536-.844.019-.012c-.038.018-.064.027-.084.032-.037.008.053-.013.125.056.021.02-.151-.135-.198-.895-.046-.734.034-1.887.38-3.652l-1.963-.384zm2.257 5.701l.791.611.024-.031.08-.101.311-.377 1.093-1.213c.922-.954 2.005-1.894 2.904-2.27l-.771-1.846c-1.31.547-2.637 1.758-3.572 2.725l-1.184 1.314-.341.414-.093.117-.025.032c-.01.013-.01.013.781.624zm5.204-3.381c.989-.413 1.791-.42 2.697-.307.871.108 2.083.385 3.437.385v-2c-1.197 0-2.041-.226-3.19-.369-1.114-.139-2.297-.146-3.715.447l.771 1.846z"
+                    ></path></svg
+                  >Enviar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </main>
   </div>
+</div>
+
+<app-popup
+  *ngIf="mostrarPopup"
+  [mensaje]="mensajePopup"
+  (cerrar)="cerrarPopup()"
+></app-popup>

@@ -1,0 +1,144 @@
+<div class="todo">
+    <header>
+      <nav>
+        <a href=""><b class="h">Home</b></a>
+        <a href=""><b class="h">Catálogo</b></a>
+        <a href=""><b class="h">Contácto</b></a>
+        <div class="iconosH">
+          <a routerLink="/home"
+            ><b class="h"
+              ><svg
+                class="icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="35"
+                height="35"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0m0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5z"
+                  clip-rule="evenodd"
+                /></svg></b
+          ></a>
+        </div>
+      </nav>
+    </header>
+  
+    <div class="carrito-container">
+      <!-- Sección izquierda: Mensaje del carrito vacío -->
+      <div class="carrito-left" *ngIf="cartCount === 0">
+        <h2>Carrito</h2>
+        <p>No hay más artículos en su carrito</p>
+        <a routerLink="/catalogo" class="continuar-comprando-link">
+          <span>&larr;</span> Continuar comprando
+        </a>
+        <div class="cont-btn">
+            <button class="copy" (click)="clearCart()">
+              <span data-text-initial="Vaciar Carrito" class="tooltip"></span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#fff"
+                    d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z"
+                  />
+                </svg>
+              </span>
+            </button>
+        </div>
+      </div>
+  
+      <!-- Sección derecha: Resumen del carrito -->
+      <div class="carrito-right" *ngIf="cartCount === 0">
+        <div class="mensaje-nota">
+          <p>
+            Recuerda verificar toda la información de los servicios, antes de
+            finalizar la compra.
+          </p>
+        </div>
+  
+        <div class="resumen-carrito">
+          <p>0 artículos</p>
+          <p>$0</p>
+        </div>
+  
+        <hr />
+  
+        <div class="total">
+          <p><strong>Total</strong></p>
+          <p><strong>$0</strong></p>
+        </div>
+  
+        <button class="btn-finalizar-compra" [disabled]="true">
+          Finalizar compra
+        </button>
+      </div>
+  
+      <!-- Sección izquierda: Resumen del carrito con artículos -->
+      <div class="carrito-left" *ngIf="cartCount > 0">
+        <h2>Carrito</h2>
+        <ul >
+          <li class="carrito-items" *ngFor="let item of cartItems">{{ item.titulo }}:  <strong>${{ item.precio }}</strong></li> <!-- Lista de ítems en el carrito -->
+        </ul>
+        <a routerLink="/catalogo" class="continuar-comprando-link">
+          <span>&larr;</span> Continuar comprando
+        </a>
+        <div class="cont-btn">
+            <button class="copy" (click)="clearCart()">
+              <span data-text-initial="Vaciar Carrito" class="tooltip"></span>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#fff"
+                    d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z"
+                  />
+                </svg>
+              </span>
+            </button>
+        </div>
+      </div>
+  
+      <!-- Sección derecha: Resumen del carrito con total -->
+      <div class="carrito-right" *ngIf="cartCount > 0">
+        <div class="mensaje-nota">
+          <p>
+            Recuerda verificar toda la información de los servicios, antes de
+            finalizar la compra.
+          </p>
+        </div>
+  
+        <div class="resumen-carrito">
+          <p>{{ cartCount }} artículos</p> <!-- Muestra el conteo de artículos -->
+          <p>${{ totalPrice }}</p> <!-- Muestra el precio total -->
+        </div>
+  
+        <hr />
+  
+        <div class="total">
+          <p><strong>Total</strong></p>
+          <p><strong>${{ totalPrice }}</strong></p> <!-- Muestra el precio total -->
+        </div>
+  
+        <button class="btn-finalizar-compra" [disabled]="cartCount === 0" (click)="finalizarCompra()">
+          Finalizar compra
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <app-popup
+  *ngIf="mostrarPopup"
+  [mensaje]="mensajePopup"
+  (cerrar)="cerrarPopup()"
+></app-popup>
+  
